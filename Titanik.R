@@ -8,26 +8,16 @@ library(tidyr)
 
 # 1.1. Getting rid of empty values and NA variables. I use as.character to apply length() function
 # for the for cycle
-new.embarked <- as.character(titanic$embarked)
+new.embarked <- titanic$embarked
+# replacing all variables that are not available or absent good with "S"
+new.embarked[which(new.embarked == "")] <-"S"
+new.embarked[which(is.na(new.embarked))] <-"S"
+new.embarked[which(is.null(new.embarked))] <-"S"
 
-for (i in 1:length(new.embarked)) {
- if (is.na(new.embarked[i]) == TRUE) {
-  new.embarked[i]<- "S"
- } else if ( new.embarked[i] =="") {
-  new.embarked[i]<- "S"
- } 
-}
-
-# 1.2 Now it's time to drop old embarked for the new ones
+# 1.2 Now it's time to drop old embarked for the new ones. I check with embarked[169] which was "", now is "S"
 tit <- titanic
 
 tit <- tit %>%  
   mutate(embarked = new.embarked)
 
-glimpse(tit)
-
-
-head(titanic$embarked, 100)
-head(tit$embarked, 100)
-
-mutate(airquality, new = -Ozone)
+# Now tit contains no empty or na values. Ready for task 2.
