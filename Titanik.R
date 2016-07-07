@@ -21,3 +21,14 @@ tit <- tit %>%
   mutate(embarked = new.embarked)
 
 # Now tit contains no empty or na values. Ready for task 2.
+
+# Calculating the mean age and replacing NAs with Mean
+mu_age <- mean(tit$age, na.rm = TRUE)
+tit$age[which(is.na(tit$age))] <-mu_age
+
+# Filling Lifeboat with dummy string for passengers who did not make it
+tit$boat <- as.character(tit$boat)
+tit$boat[which(tit$boat=="")] <-"NA"
+
+#Cabin 
+  
