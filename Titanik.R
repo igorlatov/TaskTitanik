@@ -31,4 +31,10 @@ tit$boat <- as.character(tit$boat)
 tit$boat[which(tit$boat=="")] <-"NA"
 
 #Cabin 
+has_cabin_number <- as.character(tit$cabin)
+has_cabin_number <- if_else (has_cabin_number == "", 0, 1)
+tit$has_cabin_number <- as.factor(has_cabin_number)
+glimpse(tit)
+#Publishing the result
+write.csv(tit,"titanic_clean.csv")
   
